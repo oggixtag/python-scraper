@@ -1,5 +1,5 @@
 import requests
-from bs4 import BeatifulSoup
+from bs4 import BeautifulSoup
 import json
 import os
 
@@ -8,6 +8,20 @@ HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
 }
 
+def fetch_data(url):
+    """
+    Étape 1 : Récupération (Fetching)
+    Initie une requête HTTP GET et valide la réponse.
+    """
+    try:
+         # Requête avec User-Agent et timeout de sécurité
+         response = requests.get(url, headers=HEADERS, timeout=10)
+         # Validation du status_code (200 OK)
+         response.raise_for_status()  
+         return response.text
+    except requests.exceptions.RequestException as e:
+        print(f"❌ Erreur lors de la récupération : {e}")
+    return None
 
 # --- Point d'entrée du script ---
 if __name__ == "__main__":
