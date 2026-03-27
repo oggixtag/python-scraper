@@ -60,6 +60,26 @@ def parse_html(html_content):
         return None
 
 
+def save_to_json(data, filename="data/results.json"):
+    """
+    💾 Étape 3 : Sauvegarde (Persistance)
+    Exportation standardisée au format JSON pour usage futur.
+    """
+
+    #Gestion du répertoire de sauvegarde
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+
+    try:
+        print(f"💾 Sauvegarde des données dans '{filename}'...")
+        with open(filename, mode='w', encoding='utf-8') as file:
+            # Sauvegarde avec indentation pour une lecture facile
+            json.dump(data, file, ensure_ascii=False, indent=4)
+            return True
+    except Exception as e:
+        print(f"❌ Erreur lors de la création du répertoire : {e}")
+        return False
+        
+
 # --- Point d'entrée du script ---
 if __name__ == "__main__":
     target_url = "https://news.ycombinator.com/"
@@ -72,7 +92,10 @@ if __name__ == "__main__":
     if html:
         # 🔍 Étape 2 : Extraction
         extracted_data = parse_html(html)
-        
-        
     else:
-        print("🛑 Arrêt du processus : impossible de récupérer le contenu source.")
+        print(f"🛑 Arrêt du processus : impossible de récupérer le contenu source.")
+
+    if extracted_data:
+        # 3. On sauvegarde le résultat final dans un fichier JSON
+        save_to_json(extracted_data)
+        print(f"✅ Données sauvegardées avec succès dans 'hackernews.json'")

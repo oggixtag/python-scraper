@@ -10,7 +10,12 @@ Concept : un script qui recupere les titres des derniers articles sur un site (L
 - **Base de donnees :** CSV ou JSON
 - **Gestion de version :** Git & GitHub
 
-## 📝 Fonctionnalites cles
+## 💡 Ce que j'ai appris
+- Installation de packages (pip)
+- Utilisation de BeautifulSoup ou Requests, manipulation de fichiers
+- Manipulation du DOM en JavaScript pur
+
+## 📝 Fonctionnalites cles du projet
 - **Extraction de donnees (Web Scraping) :** recuperation automatisee des titres et liens depuis Hacker News en utilisant BeautifulSoup4. Analyse selective du DOM pour isoler les informations pertinentes.
 - **Persistance des donnees (Format JSON) :** transformation des donnees HTML non structurees en un fichier JSON structure. Gestion de l'encodage (UTF-8) et de l'indentation pour assurer l'interoperabilite avec d'autres langages (comme JavaScript).
 - **Architecture modulaire :** decoupage du code en fonctions distinctes (Fetch / Parse / Save) pour faciliter la maintenance et l'evolution du script.
@@ -21,11 +26,6 @@ Concept : un script qui recupere les titres des derniers articles sur un site (L
 1. Cloner le depot : `git clone https://github.com/oggixtag/python-scraper`
 2. Configurer la base de donnees (voir dossier `/sql` ou `.env`)
 3. Lancer le serveur local
-
-## 💡 Ce que j'ai appris
-- Installation de packages (pip)
-- Utilisation de BeautifulSoup ou Requests, manipulation de fichiers
-- Manipulation du DOM en JavaScript pur
 
 ## 📁 Structure du projet
 ```
@@ -53,8 +53,11 @@ python -m venv venv
 ```
 
 Activez-le :
-- Sur Windows : `venv\Scripts\activate` ou `.\venv\Scripts\activate`
-- Sur macOS/Linux : `source venv/bin/activate`
+```
+# Windows : `venv\Scripts\activate` ou `.\venv\Scripts\activate`
+# macOS/Linux : `source venv/bin/activate`
+```
+
 
 ### 2) Installer les bibliotheques
 Options possibles :
@@ -69,8 +72,7 @@ pip freeze > requirements.txt
 
 La commande `pip freeze` liste toutes les bibliotheques installees dans votre environnement virtuel avec leur numero de version precis.
 
-
-## ⚙️ Fonctionnement du script
+## ⚙️ Fonctionnement du script et exécution
 
 Le projet suit un processus rigoureux en trois étapes pour garantir la fiabilité et la qualité des données collectées.
 
@@ -78,3 +80,16 @@ Le projet suit un processus rigoureux en trois étapes pour garantir la fiabilit
 - **🔍 Étape 2 : Extraction (Parsing)** Une fois le code source HTML récupéré, il est analysé par BeautifulSoup4. Analyse du DOM : utilisation de sélecteurs CSS précis (.titleline > a) pour isoler les informations pertinentes. Mappage de données : transformation des balises HTML en une liste de dictionnaires Python, structurant ainsi la donnée (titre, URL, source).
 - **💾 Étape 3 : Sauvegarde (Persistance)** La phase finale assure que la donnée collectée est exploitable par d'autres systèmes (Web ou Mobile). Gestion d'arborescence : vérification et création automatique du répertoire /data via le module `os` pour garantir la portabilité du script. Standardisation JSON : export des données au format JSON avec encodage UTF-8 et indentation, facilitant une future intégration avec un front-end (React/Vue.js) ou une API Node.js.
 
+### 1) Lancer le script
+Entrez dans votre projet :
+```
+cd mon_projet_web
+```
+
+Activez l'environnement virtuel :
+cf Environnement virtuel (venv)
+
+Exécution du script :
+```
+python scraper.py
+```
